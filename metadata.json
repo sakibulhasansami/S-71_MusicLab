@@ -1,0 +1,5 @@
+{
+  "name": "S-71 MusicLab",
+  "description": "A modern, high-fidelity music streaming interface backed by Firestore, featuring real-time updates and direct Google Drive integration.",
+  "requestFramePermissions": []
+}
