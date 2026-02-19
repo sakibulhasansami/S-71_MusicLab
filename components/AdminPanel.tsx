@@ -351,3 +351,34 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ theme }) => {
                       <div key={song.id} className={`flex items-center justify-between p-3 rounded-xl border ${styles.border} bg-white/5`}>
                           <div className="flex-1 min-w-0 mr-4">
   
+                              <p className={`text-sm font-bold truncate ${styles.textMain}`}>{song.title}</p>
+                              <p className={`text-xs truncate ${styles.textSec}`}>{song.artist} · {song.genre}{song.subGenre ? ` / ${song.subGenre}` : ''}</p>
+                          </div>
+                          <div className="flex items-center gap-2 shrink-0">
+                              <button onClick={() => handleTogglePin(song)} className={`p-2 rounded-lg transition-colors ${song.isPinned ? styles.accent : 'hover:bg-white/10 ' + styles.textSec}`} title={song.isPinned ? 'Unpin' : 'Pin'}>
+                                  <Pin size={16} />
+                              </button>
+                              <button onClick={() => handleDelete(song.id)} className="p-2 rounded-lg hover:bg-red-500/20 hover:text-red-400 transition-colors" title="Delete">
+                                  <Trash2 size={16} />
+                              </button>
+                          </div>
+                      </div>
+                  ))}
+                  {filteredManageSongs.length === 0 && (
+                      <p className={`text-center py-8 ${styles.textSec}`}>No tracks found.</p>
+                  )}
+              </div>
+          </div>
+      )}
+
+      {status !== 'idle' && (
+        <div className={`mt-6 p-4 rounded-xl text-center font-bold ${status === 'success' ? 'bg-green-500/20 text-green-400' : status === 'error' ? 'bg-red-500/20 text-red-400' : 'bg-white/10 ' + styles.textSec}`}>
+          {status === 'loading' && '...'}
+          {statusMsg}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AdminPanel;
