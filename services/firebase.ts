@@ -79,14 +79,14 @@ export const subscribeToSongs = (callback: (songs: Song[]) => void) => {
 export const addSongToFirestore = async (songData: Omit<Song, 'id' | 'createdAt'>) => {
   if (!db) throw new Error("Database not initialized");
 
-  // এখানে আমরা নিশ্চিত করছি যে subGenre যেন কখনো undefined না হয়
-  const finalSongData = {
+  await addDoc(collection(db, 'tracks'), {
     ...songData,
-    // যদি subGenre না থাকে, তবে এটি ডিফল্ট হিসেবে 'Pop' বা 'General' নিয়ে নিবে
-    subGenre: songData.subGenre || "Pop", 
+    // যদি subGenre কোনো কারণে undefined থাকে, তবে এটি খালি স্ট্রিং "" সেট করবে
+    subGenre: songData.subGenre || "", 
     playCount: 0,
     createdAt: serverTimestamp()
-  };
+  });
+};
 
   await addDoc(collection(db, 'tracks'), finalSongData);
 };
