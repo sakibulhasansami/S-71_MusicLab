@@ -49,13 +49,13 @@ const Footer: React.FC<FooterProps> = ({ theme }) => {
     return `https://${cleanUrl}`;
   };
 
-  // সোশ্যাল আইকনগুলোর লিস্ট
+    // ডাইনামিকালি সব ধরনের কী (Key) চেক করার জন্য এই লজিক
   const socialLinks = [
-    { icon: Facebook, url: settings.facebookUrl, id: 'fb' },
-    { icon: Twitter, url: settings.twitterUrl, id: 'tw' },
-    { icon: Instagram, url: settings.instagramUrl, id: 'ig' },
-    { icon: Github, url: settings.githubUrl, id: 'gh' },
-    { icon: Youtube, url: settings.youtubeUrl, id: 'yt' },
+    { icon: Facebook, url: settings.facebookUrl || (settings as any).FacebookUrl, id: 'fb' },
+    { icon: Twitter, url: settings.twitterUrl || (settings as any).TwitterUrl, id: 'tw' },
+    { icon: Instagram, url: settings.instagramUrl || (settings as any).InstagramUrl, id: 'ig' },
+    { icon: Github, url: settings.githubUrl || (settings as any).GithubUrl, id: 'gh' },
+    { icon: Youtube, url: settings.youtubeUrl || (settings as any).YoutubeUrl, id: 'yt' },
   ];
 
   return (
